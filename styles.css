@@ -1,0 +1,499 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Orbitron', sans-serif;
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  color: white;
+  height: 100vh;
+  overflow-x: hidden;
+}
+
+#sidebarToggle {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  font-size: 30px;
+  cursor: pointer;
+  z-index: 1001;
+}
+
+#sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 230px;
+  background-color: #111;
+  padding-top: 70px;
+  transition: transform 0.3s ease;
+  z-index: 1000;
+}
+
+#sidebar.collapsed {
+  transform: translateX(-100%);
+}
+
+#sidebar a {
+  display: block;
+  padding: 15px 25px;
+  color: white;
+  text-decoration: none;
+  transition: background 0.3s;
+}
+
+#sidebar a:hover {
+  background-color: #575757;
+}
+
+main.content {
+  margin-left: 0;
+  padding: 80px 20px;
+  text-align: center;
+  transition: margin-left 0.3s ease;
+  height: 100vh;
+}
+
+h1 {
+  font-size: 3rem;
+  margin-bottom: 30px;
+}
+
+#h6Elem {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 20px 30px;
+  border-radius: 12px;
+  font-size: 1.3rem;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(8px);
+}
+
+#btnListen {
+  padding: 14px 35px;
+  border: none;
+  border-radius: 25px;
+  font-size: 1.2rem;
+  background: linear-gradient(to right, #00c6ff, #0072ff);
+  color: white;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+#btnListen:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 12px #00c6ff;
+}
+
+#photoGallery {
+  margin-top: 30px;
+  display: none;
+}
+
+#photoGallery img {
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  margin: 10px;
+  transition: transform 0.3s;
+}
+
+#photoGallery img:hover {
+  transform: scale(1.05);
+}
+
+#debugText {
+  margin-top: 20px;
+  font-size: 0.9rem;
+  color: #ccc;
+}
+#photoCanvas {
+  border: 2px solid #ccc;
+  margin-top: 10px;
+}
+
+/* Default styles - override nothing */
+body.default-theme {
+  background: white;
+  color: black;
+}
+
+/* Dark mode */
+body.dark-theme {
+  background-color: #121212;
+  color: #e0e0e0;
+}
+
+body.dark-theme a {
+  color: #00ffff;
+}
+
+body.dark-theme #sidebar {
+  background-color: #1f1f1f;
+}
+
+/* Cyberpunk mode */
+body.cyberpunk-theme {
+  background-color: #0f0c29;
+  background-image: linear-gradient(315deg, #0f0c29 0%, #302b63 74%);
+  color: #00ffea;
+  font-family: 'Orbitron', sans-serif;
+}
+
+body.cyberpunk-theme a {
+  color: #ff00ff;
+}
+
+body.cyberpunk-theme #sidebar {
+  background-color: #1b0036;
+}
+#photoGallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 20px;
+  justify-content: center;
+}
+
+#photoGallery img {
+  border: 3px solid #00ffe7;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 255, 231, 0.3);
+  transition: transform 0.3s, box-shadow 0.3s;
+  width: 150px;
+  height: auto;
+}
+
+#photoGallery img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 25px rgba(0, 255, 231, 0.6);
+}
+#cameraStream, #photoCanvas {
+  border: 4px solid #00ffe7;
+  border-radius: 15px;
+  box-shadow: 0 0 20px #00ffe7aa;
+  width: 320px; /* or any size you prefer */
+  max-width: 100%;
+  display: block;
+  margin: 15px auto;
+  background: #111; /* subtle dark background behind video/canvas */
+}
+
+#downloadLink {
+  display: inline-block;
+  margin: 10px auto 30px auto;
+  padding: 10px 25px;
+  background: #00ffe7;
+  color: #000;
+  font-weight: bold;
+  border-radius: 12px;
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: 0 0 10px #00ffe7bb;
+  transition: background-color 0.3s ease;
+  user-select: none;
+  text-align: center;
+}
+
+#downloadLink:hover {
+  background: #00ccaa;
+  box-shadow: 0 0 15px #00ccaaee;
+}
+#diarySection {
+  border-radius: 6px;
+  background: #fff;
+  box-shadow: 0 0 8px rgba(0,0,0,0.1);
+  font-family: Arial, sans-serif;
+}
+
+#diaryInput {
+  font-family: Arial, sans-serif;
+  font-size: 1em;
+  padding: 6px;
+}
+
+#diaryEntriesList .diary-entry {
+  border-bottom: 1px solid #ddd;
+  padding: 4px 0;
+}
+
+#diaryEntriesList .diary-entry strong {
+  color: #555;
+}
+
+button {
+  background-color: #007bff;
+  border: none;
+  color: white;
+  padding: 6px 12px;
+  margin-right: 6px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+section h2 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+  border-bottom: 2px solid #00ffe7;
+  padding-bottom: 5px;
+}
+
+table {
+  width: 100%;
+  border: 1px solid #00ffe7;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+th, td {
+  border: 1px solid #00ffe7;
+  padding: 10px;
+  text-align: left;
+}
+
+tr:nth-child(even) {
+  background-color: rgba(0, 255, 231, 0.1);
+}
+
+#howToUse{
+  min-height: 100vh;
+  margin-top: 3rem;
+  padding-top: 3rem;
+  
+}
+.bento-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 25px;
+  padding: 0 20px;
+}
+
+.bento-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid #00ffe7;
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+  backdrop-filter: blur(5px);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.bento-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 255, 231, 0.3);
+}
+
+.bento-card img {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+  margin-bottom: 15px;
+}
+
+.bento-card h3 {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  color: #00ffe7;
+}
+
+.bento-card p {
+  font-size: 0.95rem;
+  color: #e0e0e0;
+}
+.bento-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 25px;
+  padding: 0 20px;
+}
+
+.bento-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid #00ffe7;
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+  backdrop-filter: blur(5px);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.bento-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 255, 231, 0.3);
+}
+
+.bento-card h3 {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  color: #00ffe7;
+}
+
+.bento-card p {
+  font-size: 0.95rem;
+  color: #e0e0e0;
+}
+/* Floating Help Button */
+#helpButton {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background: #00ffe7;
+  color: black;
+  font-size: 24px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 12px #00ffe7aa;
+  cursor: pointer;
+  z-index: 1002;
+  transition: background 0.3s;
+}
+
+#helpButton:hover {
+  background: #00ccaa;
+}
+
+/* Help Menu */
+#helpMenu {
+  position: fixed;
+  bottom: 90px;
+  right: 30px;
+  background: rgba(0, 0, 0, 0.8);
+  border: 1px solid #00ffe7;
+  border-radius: 10px;
+  padding: 10px 0;
+  display: none;
+  flex-direction: column;
+  z-index: 1002;
+  box-shadow: 0 0 15px rgba(0, 255, 231, 0.5);
+}
+
+#helpMenu a {
+  color: #00ffe7;
+  text-decoration: none;
+  display: block;
+  padding: 10px 20px;
+  transition: background 0.2s;
+}
+
+#helpMenu a:hover {
+  background: rgba(0, 255, 231, 0.2);
+}
+
+#about{
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.diary-container {
+  margin: 30px auto;
+  padding: 20px;
+  max-width: 700px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid #00ffe7;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(0, 255, 231, 0.2);
+  backdrop-filter: blur(6px);
+  color: white;
+  text-align: left;
+  display: none;
+}
+
+.diary-container h2 {
+  font-size: 1.8rem;
+  color: #00ffe7;
+  margin-bottom: 15px;
+  border-bottom: 1px solid #00ffe766;
+  padding-bottom: 5px;
+}
+
+#diaryInput {
+  width: 100%;
+  min-height: 120px;
+  padding: 12px;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 1px solid #00ffe7aa;
+  background: #0c1a1e;
+  color: #00ffe7;
+  margin-bottom: 15px;
+  resize: vertical;
+}
+
+.diary-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.diary-controls button {
+  flex: 1 1 auto;
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  background: linear-gradient(135deg, #00c6ff, #0072ff);
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.diary-controls button:hover {
+  background: linear-gradient(135deg, #00ffe7, #00ccaa);
+  transform: scale(1.05);
+}
+
+.entry-list {
+  max-height: 250px;
+  overflow-y: auto;
+  font-size: 0.95rem;
+  padding: 5px;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  color: #e0e0e0;
+}
+
+.entry-list li {
+  padding: 6px;
+  border-bottom: 1px solid #00ffe744;
+}
+
+.entry-list li:last-child {
+  border-bottom: none;
+}
+.entry-list li:hover {
+  background-color: rgba(0, 255, 231, 0.1);
+  color: #00ffe7;
+}
+.bento-card img {
+  filter: grayscale(100%) brightness(200%); /* For white look */
+}
+
+.cameraContainer{
+  /* min-height: 100vh; */
+  /* border: 2px solid red; */
+  max-width: 100%;
+  margin-inline: auto;
+  /* background-color: white; */
+  z-index: 30;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cameraFlex{
+  display: flex;
+  gap: 2em;
+}

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WHISPA AI</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="theme.css" id="themeStylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div id="sidebarToggle">&#9776;</div>
+  <div id="sidebar" class="collapsed">
+    <a href="#" onclick="openCamera()">📸 Take Photo</a>
+    <a href="https://open.spotify.com" target="_blank">🎵 Play Spotify</a>
+    <a href="#" onclick="checkWeather()">☁️ Check Weather</a>
+    <a href="#" onclick="showImages()">🖼️ Show Photos</a>
+    <a href="#" data-action="switchTheme">🌓 Toggle Theme</a>
+    <a href="#howToUse">📘 How to Use</a>
+    <a href="#voiceCommands">🗣️ Voice Commands</a>
+    <a href="#about">ℹ️ About</a>
+  </div>
+
+  <main class="content">
+    <h1>🤖 WHISPA</h1>
+    <div id="h6Elem">Say something to begin...</div>
+    <button id="btnListen">🎤 Start Listening</button>
+    <p id="debugText"></p>
+
+    <div id="photoGallery" style="margin-top:20px; display:none;"></div>
+    <audio id="bgMusic" loop>
+      <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg" />
+    </audio>
+    <div id="timerDisplay" style="margin-top:10px;color:black;font-weight:bold;"></div>
+    <div id="spotifyPlayer" style="display:none;margin-top:20px;">
+      <iframe src="https://open.spotify.com/embed/playlist/37i9dQZF1DXcBWIGoYBM5M"
+        width="300" height="380" frameborder="0" allow="encrypted-media"></iframe>
+    </div>
+
+    <div class="cameraContainer">
+      <div class="cameraFlex">
+        <video id="cameraStream" autoplay playsinline style="display:none;width:320px;"></video>
+        <canvas id="photoCanvas" style="display:none;width:320px;"></canvas>
+      </div>
+      <a id="downloadLink" style="display:none;" download="photo.png">⬇️ Download Photo</a>
+    </div>
+
+    <div id="diarySection" class="diary-container">
+      <h2>📔 Voice Diary</h2>
+      <textarea id="diaryInput" placeholder="Write or speak your thoughts here..."></textarea>
+      <div class="diary-controls">
+        <button id="startVoiceBtn">🎤 Start Voice</button>
+        <button id="stopVoiceBtn" disabled>⏹️ Stop Voice</button>
+        <button id="saveDiaryBtn">💾 Save</button>
+        <button id="clearDiaryBtn">🧹 Clear All</button>
+        <button id="toggleDiaryBtn">❌ Close</button>
+      </div>
+      <hr style="border-color: #00ffe766;" />
+      <div id="diaryEntriesList" class="entry-list"></div>
+    </div>
+  </main>
+
+  <section id="howToUse" style="margin-top: 60px; max-width: 1200px; margin-inline: auto;">
+    <h2 style="font-size: 2rem; margin-bottom: 20px; text-align: center; border-bottom: 2px solid #00ffe7; padding-bottom: 8px;">
+      📘 How to Use WHISPA AI
+    </h2>
+    <div class="bento-grid">
+      <div class="bento-card">
+        <img src="https://cdn-icons-png.flaticon.com/512/25/25694.png" alt="Mic" />
+        <h3>Start Listening</h3>
+        <p>Click the 🎤 button to activate voice recognition.</p>
+      </div>
+      <div class="bento-card">
+        <img src="https://cdn-icons-png.flaticon.com/512/25/25694.png" alt="Voice Command" />
+        <h3>Speak Commands</h3>
+        <p>Say things like “open camera” or “switch to dark mode”.</p>
+      </div>
+      <div class="bento-card">
+        <img src="https://cdn-icons-png.flaticon.com/512/84/84380.png" alt="Diary" />
+        <h3>Use the Diary</h3>
+        <p>Write entries or use voice input to log your thoughts.</p>
+      </div>
+      <div class="bento-card">
+        <img src="https://cdn-icons-png.flaticon.com/512/1828/1828919.png" alt="Theme" />
+        <h3>Switch Themes</h3>
+        <p>Toggle themes via sidebar or use commands like “dark mode”.</p>
+      </div>
+      <div class="bento-card">
+        <img src="https://cdn-icons-png.flaticon.com/512/869/869869.png" alt="Weather" />
+        <h3>Check Weather</h3>
+        <p>Ask about the weather in any city, like “weather in Lagos”.</p>
+      </div>
+      <div class="bento-card">
+        <img src="https://cdn-icons-png.flaticon.com/512/889/889140.png" alt="Spotify" />
+        <h3>Play Spotify</h3>
+        <p>Open your music using voice or the quick link in the sidebar.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="voiceCommands" style="margin-top: 60px; max-width: 1200px; margin-inline: auto;">
+    <h2 style="font-size: 2rem; margin-bottom: 20px; text-align: center; border-bottom: 2px solid #00ffe7; padding-bottom: 8px;">
+      🗣️ Available Voice Commands
+    </h2>
+    <div class="bento-grid">
+      <div class="bento-card"><h3>"open camera"</h3><p>Activates your device’s webcam.</p></div>
+      <div class="bento-card"><h3>"take photo"</h3><p>Captures a snapshot using your camera.</p></div>
+      <div class="bento-card"><h3>"open diary"</h3><p>Shows the diary section for typing or voice input.</p></div>
+      <div class="bento-card"><h3>"start diary voice"</h3><p>Starts dictation to fill in the diary input.</p></div>
+      <div class="bento-card"><h3>"switch to dark mode"</h3><p>Changes the theme to dark mode.</p></div>
+      <div class="bento-card"><h3>"switch to light mode"</h3><p>Reverts to the light/default theme.</p></div>
+      <div class="bento-card"><h3>"toggle sidebar"</h3><p>Shows or hides the left sidebar navigation.</p></div>
+      <div class="bento-card"><h3>"weather in [city]"</h3><p>Fetches live weather (e.g., “weather in Lagos”).</p></div>
+      <div class="bento-card"><h3>"show photos"</h3><p>Opens your captured image gallery.</p></div>
+      <div class="bento-card"><h3>"play spotify"</h3><p>Opens the embedded Spotify player.</p></div>
+      <div class="bento-card"><h3>"set timer for 1 minute"</h3><p>Starts a countdown timer. Also works with seconds.</p></div>
+      <div class="bento-card"><h3>"clear diary input"</h3><p>Clears what you've typed or spoken in the diary box.</p></div>
+    </div>
+  </section>
+
+  <section id="about" style="margin-top: 40px; text-align: left; max-width: 800px; margin-inline: auto;">
+    <h2>🤖 About WHISPA AI</h2>
+    <p style="line-height: 1.6;">
+      WHISPA is a browser-based AI assistant designed to perform tasks via voice commands. It uses speech recognition and speech synthesis along with browser APIs to interact with your camera, diary, gallery, and music. Built with HTML, CSS, and JavaScript, it runs directly in your browser—no installation required.
+    </p>
+  </section>
+
+  <div id="helpButton" onclick="toggleHelpMenu()">❓</div>
+  <div id="helpMenu">
+    <a href="#howToUse">📘 How to Use</a>
+    <a href="#voiceCommands">🗣️ Voice Commands</a>
+    <a href="#about">ℹ️ About</a>
+  </div>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/face-api.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+  <script src="https://cdn.jsdelivr.net/npm/meyda"></script>
+  <script defer src="script.js"></script>
+</body>
+</html>
