@@ -13,16 +13,13 @@ This project implements an AI-powered voice recognition system designed for secu
 
 🔒 Secure Voiceprint Storage
 
-📈 Performance Metrics Dashboard
 
 🧩 Modular Architecture for Easy Integration
 
 🧑‍💻 Technologies Used
-Python / TensorFlow / Keras – AI model training and inference
+Javascript – AI model training and inference
 
 JavaScript / HTML / CSS – User interface and frontend interactions
-
-MySQL / PostgreSQL – Relational database for storing users, voiceprints, and logs
 
 Flask / Node.js – API server for processing requests and handling authentication logic
 

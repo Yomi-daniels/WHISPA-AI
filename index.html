@@ -1,102 +1,165 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>WHISPA AI</title>
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="modern.css" />
   <link rel="stylesheet" href="theme.css" id="themeStylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet" />
 </head>
 <body>
-  <div id="sidebarToggle">&#9776;</div>
-  <div id="sidebar" class="collapsed">
-    <a href="#" onclick="openCamera()">📸 Take Photo</a>
-    <a href="https://open.spotify.com" target="_blank">🎵 Play Spotify</a>
-    <a href="#" onclick="checkWeather()">☁️ Check Weather</a>
-    <a href="#" onclick="showImages()">🖼️ Show Photos</a>
-    <a href="#" data-action="switchTheme">🌓 Toggle Theme</a>
-    <a href="#howToUse">📘 How to Use</a>
-    <a href="#voiceCommands">🗣️ Voice Commands</a>
-    <a href="#about">ℹ️ About</a>
-  </div>
+ <div id="sidebarToggle">&#9776;</div>
+<div id="sidebar" class="collapsed">
+  <a href="#" onclick="openCamera()">
+    <img src="https://img.icons8.com/ios-filled/24/ffffff/camera.png" alt="Camera" style="vertical-align:middle;margin-right:6px;" />
+    Take Photo
+  </a>
+  <a href="https://open.spotify.com" target="_blank">
+    <img src="https://img.icons8.com/ios-filled/24/ffffff/spotify.png" alt="Spotify" style="vertical-align:middle;margin-right:6px;" />
+    Play Spotify
+  </a>
+  <a href="#" onclick="checkWeather()">
+    <img src="https://img.icons8.com/ios-filled/24/ffffff/partly-cloudy-day.png" alt="Weather" style="vertical-align:middle;margin-right:6px;" />
+    Check Weather
+  </a>
+  <a href="#" onclick="showImages()">
+    <img src="https://img.icons8.com/ios-filled/24/ffffff/picture.png" alt="Photos" style="vertical-align:middle;margin-right:6px;" />
+    Show Photos
+  </a>
+  <a href="#" data-action="switchTheme">
+    <img src="https://img.icons8.com/ios-filled/24/ffffff/contrast.png" alt="Theme" style="vertical-align:middle;margin-right:6px;" />
+    Toggle Theme
+  </a>
+  <a href="#howToUse">
+    <img src="https://img.icons8.com/ios-filled/24/ffffff/book.png" alt="How to Use" style="vertical-align:middle;margin-right:6px;" />
+    How to Use
+  </a>
+  <a href="#voiceCommands">
+    <img src="https://img.icons8.com/ios-filled/24/ffffff/voice-presentation.png" alt="Voice Commands" style="vertical-align:middle;margin-right:6px;" />
+    Voice Commands
+  </a>
+  <a href="#about">
+    <img src="https://img.icons8.com/ios-filled/24/ffffff/info.png" alt="About" style="vertical-align:middle;margin-right:6px;" />
+    About
+  </a>
+</div>
 
   <main class="content">
-    <h1>🤖 WHISPA</h1>
-    <div id="h6Elem">Say something to begin...</div>
-    <button id="btnListen">🎤 Start Listening</button>
-    <p id="debugText"></p>
-
-    <div id="photoGallery" style="margin-top:20px; display:none;"></div>
-    <audio id="bgMusic" loop>
-      <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg" />
-    </audio>
-    <div id="timerDisplay" style="margin-top:10px;color:black;font-weight:bold;"></div>
-    <div id="spotifyPlayer" style="display:none;margin-top:20px;">
-      <iframe src="https://open.spotify.com/embed/playlist/37i9dQZF1DXcBWIGoYBM5M"
-        width="300" height="380" frameborder="0" allow="encrypted-media"></iframe>
-    </div>
-
-    <div class="cameraContainer">
-      <div class="cameraFlex">
-        <video id="cameraStream" autoplay playsinline style="display:none;width:320px;"></video>
-        <canvas id="photoCanvas" style="display:none;width:320px;"></canvas>
+  <div class="main-header">
+    <div class="logo-title">
+      <img src="image/logo.png" alt="logo" class="main-logo" />
+      <div class="ai-title">
+        <h1>WHISPA AI</h1>
+        <span class="ai-desc">Your Voice Assistant</span>
       </div>
-      <a id="downloadLink" style="display:none;" download="photo.png">⬇️ Download Photo</a>
     </div>
-
-    <div id="diarySection" class="diary-container">
-      <h2>📔 Voice Diary</h2>
-      <textarea id="diaryInput" placeholder="Write or speak your thoughts here..."></textarea>
-      <div class="diary-controls">
-        <button id="startVoiceBtn">🎤 Start Voice</button>
-        <button id="stopVoiceBtn" disabled>⏹️ Stop Voice</button>
-        <button id="saveDiaryBtn">💾 Save</button>
-        <button id="clearDiaryBtn">🧹 Clear All</button>
-        <button id="toggleDiaryBtn">❌ Close</button>
-      </div>
-      <hr style="border-color: #00ffe766;" />
-      <div id="diaryEntriesList" class="entry-list"></div>
+    <div class="listen-block">
+      <button id="btnListen">
+        <img src="https://img.icons8.com/ios-filled/32/ffffff/microphone.png" alt="Mic" style="vertical-align:middle;margin-right:10px;" />
+        Start Listening
+      </button>
+      <div id="h6Elem" class="listen-status">Say something to begin...</div>
     </div>
-  </main>
+  </div>
 
-  <section id="howToUse" style="margin-top: 60px; max-width: 1200px; margin-inline: auto;">
-    <h2 style="font-size: 2rem; margin-bottom: 20px; text-align: center; border-bottom: 2px solid #00ffe7; padding-bottom: 8px;">
-      📘 How to Use WHISPA AI
+  <p id="debugText"></p>
+
+  <div id="photoGallery" style="margin-top:20px; display:none;"></div>
+  <audio id="bgMusic" loop>
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg" />
+  </audio>
+  <div id="timerDisplay" style="margin-top:10px;color:black;font-weight:bold;"></div>
+  <div id="spotifyPlayer" style="display:none;margin-top:20px;">
+    <iframe src="https://open.spotify.com/embed/playlist/37i9dQZF1DXcBWIGoYBM5M"
+      width="300" height="380" frameborder="0" allow="encrypted-media"></iframe>
+  </div>
+
+  <div class="cameraContainer">
+    <div class="cameraFlex">
+      <video id="cameraStream" autoplay playsinline style="display:none;width:320px;"></video>
+      <canvas id="photoCanvas" style="display:none;width:320px;"></canvas>
+    </div>
+    <a id="downloadLink" style="display:none;" download="photo.png">
+      <img src="https://img.icons8.com/ios-filled/24/ffffff/download.png" alt="Download" style="vertical-align:middle;margin-right:6px;" />
+      Download Photo
+    </a>
+  </div>
+
+  <div id="diarySection" class="diary-container">
+    <h2>
+      <img src="https://img.icons8.com/ios-filled/24/ffffff/journal.png" alt="Diary" style="vertical-align:middle;margin-right:6px;" />
+      Voice Diary
     </h2>
-    <div class="bento-grid">
+    <textarea id="diaryInput" placeholder="Write or speak your thoughts here..."></textarea>
+    <div class="diary-controls">
+      <button id="startVoiceBtn">
+        <img src="https://img.icons8.com/ios-filled/24/ffffff/microphone.png" alt="Start Voice" style="vertical-align:middle;margin-right:6px;" />
+        Start Voice
+      </button>
+      <button id="stopVoiceBtn" disabled>
+        <img src="https://img.icons8.com/ios-filled/24/ffffff/stop.png" alt="Stop Voice" style="vertical-align:middle;margin-right:6px;" />
+        Stop Voice
+      </button>
+      <button id="saveDiaryBtn">
+        <img src="https://img.icons8.com/ios-filled/24/ffffff/save.png" alt="Save" style="vertical-align:middle;margin-right:6px;" />
+        Save
+      </button>
+      <button id="clearDiaryBtn">
+        <img src="https://img.icons8.com/ios-filled/24/ffffff/broom.png" alt="Clear All" style="vertical-align:middle;margin-right:6px;" />
+        Clear All
+      </button>
+      <button id="toggleDiaryBtn">
+        <img src="https://img.icons8.com/ios-filled/24/ffffff/delete-sign.png" alt="Close" style="vertical-align:middle;margin-right:6px;" />
+        Close
+      </button>
+    </div>
+    <hr style="border-color: #00ffe766;" />
+    <div id="diaryEntriesList" class="entry-list"></div>
+  </div>
+</main>
+<section id="howToUse" style="margin-top: 60px; max-width: 900px; margin-inline: auto;">
+  <h2 style="font-size: 2rem; margin-bottom: 20px; text-align: center; border-bottom: 2px solid #00ffe7; padding-bottom: 8px;">
+     How to Use WHISPA AI
+  </h2>
+  <div class="carousel-container">
+    <button class="carousel-btn left" onclick="carouselPrev()">&#8592;</button>
+    <div class="bento-grid carousel-track">
       <div class="bento-card">
-        <img src="https://cdn-icons-png.flaticon.com/512/25/25694.png" alt="Mic" />
+        <img src="https://img.icons8.com/ios-filled/80/ffffff/microphone.png" alt="Mic" />
         <h3>Start Listening</h3>
         <p>Click the 🎤 button to activate voice recognition.</p>
       </div>
       <div class="bento-card">
-        <img src="https://cdn-icons-png.flaticon.com/512/25/25694.png" alt="Voice Command" />
+        <img src="https://img.icons8.com/ios-filled/80/ffffff/voice-presentation.png" alt="Voice Command" />
         <h3>Speak Commands</h3>
         <p>Say things like “open camera” or “switch to dark mode”.</p>
       </div>
       <div class="bento-card">
-        <img src="https://cdn-icons-png.flaticon.com/512/84/84380.png" alt="Diary" />
+        <img src="https://img.icons8.com/ios-filled/80/ffffff/journal.png" alt="Diary" />
         <h3>Use the Diary</h3>
         <p>Write entries or use voice input to log your thoughts.</p>
       </div>
       <div class="bento-card">
-        <img src="https://cdn-icons-png.flaticon.com/512/1828/1828919.png" alt="Theme" />
+        <img src="https://img.icons8.com/ios-filled/80/ffffff/contrast.png" alt="Theme" />
         <h3>Switch Themes</h3>
         <p>Toggle themes via sidebar or use commands like “dark mode”.</p>
       </div>
       <div class="bento-card">
-        <img src="https://cdn-icons-png.flaticon.com/512/869/869869.png" alt="Weather" />
+        <img src="https://img.icons8.com/ios-filled/80/ffffff/partly-cloudy-day.png" alt="Weather" />
         <h3>Check Weather</h3>
         <p>Ask about the weather in any city, like “weather in Lagos”.</p>
       </div>
       <div class="bento-card">
-        <img src="https://cdn-icons-png.flaticon.com/512/889/889140.png" alt="Spotify" />
+        <img src="https://img.icons8.com/ios-filled/80/ffffff/spotify.png" alt="Spotify" />
         <h3>Play Spotify</h3>
         <p>Open your music using voice or the quick link in the sidebar.</p>
       </div>
     </div>
-  </section>
+    <button class="carousel-btn right" onclick="carouselNext()">&#8594;</button>
+  </div>
+</section>
 
   <section id="voiceCommands" style="margin-top: 60px; max-width: 1200px; margin-inline: auto;">
     <h2 style="font-size: 2rem; margin-bottom: 20px; text-align: center; border-bottom: 2px solid #00ffe7; padding-bottom: 8px;">
@@ -118,12 +181,53 @@
     </div>
   </section>
 
-  <section id="about" style="margin-top: 40px; text-align: left; max-width: 800px; margin-inline: auto;">
-    <h2>🤖 About WHISPA AI</h2>
-    <p style="line-height: 1.6;">
-      WHISPA is a browser-based AI assistant designed to perform tasks via voice commands. It uses speech recognition and speech synthesis along with browser APIs to interact with your camera, diary, gallery, and music. Built with HTML, CSS, and JavaScript, it runs directly in your browser—no installation required.
-    </p>
-  </section>
+<section id="about" style="margin-top: 40px; max-width: 900px; margin-inline: auto;">
+  <div class="about-card split fade-in">
+    <div class="about-content">
+      <h2 style="color:#a259ff; margin-top:0;">About WHISPA AI</h2>
+      <span class="about-subtitle" style="color:#fff; opacity:0.8;">Your browser-based voice assistant</span>
+      <p class="about-desc">
+        <strong>WHISPA</strong> is a smart, browser-based AI assistant that responds to your voice commands. It uses advanced speech recognition and synthesis, plus browser APIs, to interact with your camera, diary, gallery, and music.
+      </p>
+    </div>
+    <div class="about-image">
+      <img src="https://img.icons8.com/ios-filled/160/ffffff/artificial-intelligence.png" alt="AI Logo" />
+    </div>
+  </div>
+  <div class="about-card split fade-in">
+    <div class="about-image">
+      <img src="https://img.icons8.com/ios-filled/160/ffffff/voice-recognition.png" alt="Voice Recognition" />
+    </div>
+    <div class="about-content">
+      <h3 style="color:#a259ff;">Voice Commands</h3>
+      <p class="about-desc">
+        Control WHISPA hands-free: say <span style="color:#a259ff;">“Open camera”</span>, <span style="color:#a259ff;">“Play Spotify”</span>, or <span style="color:#a259ff;">“Switch to dark mode”</span> and watch it respond instantly.
+      </p>
+    </div>
+  </div>
+  <div class="about-card split fade-in">
+    <div class="about-content">
+      <h3 style="color:#a259ff;">Built for the Browser</h3>
+      <p class="about-desc">
+        WHISPA is made with <span style="color:#a259ff;">HTML</span>, <span style="color:#a259ff;">CSS</span>, and <span style="color:#a259ff;">JavaScript</span>. No installation needed—just open and use!
+      </p>
+    </div>
+    <div class="about-image">
+      <img src="https://img.icons8.com/ios-filled/160/ffffff/web.png" alt="Web Browser" />
+    </div>
+  </div>
+  <div class="about-card split fade-in">
+    <div class="about-image">
+      <img src="https://img.icons8.com/ios-filled/160/ffffff/diary.png" alt="Diary" />
+    </div>
+    <div class="about-content">
+      <h3 style="color:#a259ff;">Voice Diary</h3>
+      <p class="about-desc">
+        Log your thoughts by typing or speaking. Your diary is private and instantly accessible.
+      </p>
+    </div>
+  </div>
+</section>
 
   <div id="helpButton" onclick="toggleHelpMenu()">❓</div>
   <div id="helpMenu">

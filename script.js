@@ -747,3 +747,15 @@ async function verifyVoiceMatch() {
 }
 
 
+// ...existing code...
+
+function carouselNext() {
+  const track = document.querySelector('.carousel-track');
+  track.scrollBy({ left: 240, behavior: 'smooth' });
+}
+function carouselPrev() {
+  const track = document.querySelector('.carousel-track');
+  track.scrollBy({ left: -240, behavior: 'smooth' });
+}
+
+// ...existing code...
